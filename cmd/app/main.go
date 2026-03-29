@@ -1,6 +1,8 @@
 package app
 
 import (
+	"fmt"
+
 	"github.com/avraam311/gotelnet/internal/flags"
 	"github.com/avraam311/gotelnet/internal/telnet"
 )
@@ -18,5 +20,7 @@ func New(telnet *telnet.Telnet, flags *flags.Flags) *App {
 }
 
 func (a *App) Run() {
+	address := fmt.Sprintf("%s:%d", a.flags.Host, a.flags.Port)
+	fmt.Println("Telnet client for", address)
 	a.telnet.ConnectAndServe(a.flags.Host, a.flags.Port, a.flags.Timeout)
 }
